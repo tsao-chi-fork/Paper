@@ -24,7 +24,7 @@ This should solve some deadlock risks
 Part of this commit was authored by: Spottedleaf
 
 diff --git a/src/main/java/net/minecraft/server/NetworkManager.java b/src/main/java/net/minecraft/server/NetworkManager.java
-index b1dededc15cce686ead74a99bee64c89ac1de22c..d24d7df807287c51a8dd5ecf4f7c842b7cdf3976 100644
+index 42f7817c8654a70bc9d584c86e37025f7ad0f4f2..165247db481fe74aef72ed8eb5501ae345caf66d 100644
 --- a/src/main/java/net/minecraft/server/NetworkManager.java
 +++ b/src/main/java/net/minecraft/server/NetworkManager.java
 @@ -64,6 +64,10 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
@@ -126,18 +126,18 @@ index b1dededc15cce686ead74a99bee64c89ac1de22c..d24d7df807287c51a8dd5ecf4f7c842b
 +        // Paper end
      }
  
-     private void dispatchPacket(Packet<?> packet, @Nullable GenericFutureListener<? extends Future<? super Void>> genericFutureListener) { this.b(packet, genericFutureListener); } // Paper - OBFHELPER
+     @com.destroystokyo.paper.util.annotation.ObfuscateHelper("dispatchPacket") // Paper - OBFHELPER
 @@ -214,21 +275,46 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
  
      }
  
--    private void sendPacketQueue() { this.o(); } // Paper - OBFHELPER
+-    @com.destroystokyo.paper.util.annotation.ObfuscateHelper("sendPacketQueue") // Paper - OBFHELPER
 -    private void o() {
 -        if (this.channel != null && this.channel.isOpen()) {
 -            Queue queue = this.packetQueue;
 -
 +    // Paper start - rewrite this to be safer on
-+    private boolean sendPacketQueue() { return this.o(); } // OBFHELPER // void -> boolean
++    @com.destroystokyo.paper.util.annotation.ObfuscateHelper("sendPacketQueue") // OBFHELPER
 +    private boolean o() { // void -> boolean
 +        if (!isConnected()) {
 +            return true;

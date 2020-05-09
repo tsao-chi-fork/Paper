@@ -110,7 +110,7 @@ index 71089442c189336fc0061852a661581784a64013..c439a8d0191c8667c881b2111b8c640c
          return (int) (f + f1 + f2);
      }
 diff --git a/src/main/java/net/minecraft/server/BlockPosition.java b/src/main/java/net/minecraft/server/BlockPosition.java
-index f8ac39e1b019b0918996f745d99f6ed09db0fd11..0ab2b23440346a0faa22ffb4d585662b1120d3f5 100644
+index 01ee84853da9b4c1e8cb9b49fc4d3d6c04110d67..0328eb1ed73c975ae7720267a59f707ee20ac9f4 100644
 --- a/src/main/java/net/minecraft/server/BlockPosition.java
 +++ b/src/main/java/net/minecraft/server/BlockPosition.java
 @@ -343,11 +343,13 @@ public class BlockPosition extends BaseBlockPosition implements MinecraftSeriali
@@ -163,7 +163,7 @@ index f8ac39e1b019b0918996f745d99f6ed09db0fd11..0ab2b23440346a0faa22ffb4d585662b
 +        }*/
 +        // Paper end
  
-         public BlockPosition.MutableBlockPosition setValues(int i, int j, int k) { return d(i, j, k);} // Paper - OBFHELPER
+         @com.destroystokyo.paper.util.annotation.ObfuscateHelper("setValues") // Paper - OBFHELPER
          public BlockPosition.MutableBlockPosition d(int i, int j, int k) {
 -            this.b = i;
 -            this.c = j;
@@ -189,19 +189,19 @@ index f8ac39e1b019b0918996f745d99f6ed09db0fd11..0ab2b23440346a0faa22ffb4d585662b
 +            return this.d(this.x + i, this.y + j, this.z + k);
          }
  
-         public final void setX(final int x) { this.o(x); } // Paper - OBFHELPER
+         @com.destroystokyo.paper.util.annotation.ObfuscateHelper("setX") // Paper - OBFHELPER
          public void o(int i) {
 -            this.b = i;
 +            this.x = i; // Paper change to x
          }
  
-         public final void setY(final int y) { this.p(y); } // Paper - OBFHELPER
+         @com.destroystokyo.paper.util.annotation.ObfuscateHelper("setY") // Paper - OBFHELPER
          public void p(int i) {
 -            this.c = i;
 +            this.y = i; // Paper change to y
          }
  
-         public final void setZ(final int z) { this.q(z); } // Paper - OBFHELPER
+         @com.destroystokyo.paper.util.annotation.ObfuscateHelper("setZ") // Paper - OBFHELPER
          public void q(int i) {
 -            this.d = i;
 +            this.z = i; // Paper change to z

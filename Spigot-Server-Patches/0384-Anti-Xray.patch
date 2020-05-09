@@ -1008,7 +1008,7 @@ index 0000000000000000000000000000000000000000..2eff19f6aaa31245f80910c6fbb541e3
 +    }
 +}
 diff --git a/src/main/java/net/minecraft/server/Chunk.java b/src/main/java/net/minecraft/server/Chunk.java
-index af0d6aff4de78e81fd3feb16719efdccc05ccb90..2604fe9756e90cb70d3d527edddb917772e70973 100644
+index dc4d53ac367040db118122d3a99e26e374da1313..e9d60fccbfb9f6fbe77e3aff2a9a0dad2952b6c1 100644
 --- a/src/main/java/net/minecraft/server/Chunk.java
 +++ b/src/main/java/net/minecraft/server/Chunk.java
 @@ -416,7 +416,7 @@ public class Chunk implements IChunkAccess {
@@ -1043,7 +1043,7 @@ index 8e4b3e52cbc95e24b1d72aed9ec8c32b94a91561..d287ea55c550dbebbbc1d5f815296ae7
              protochunk.a(biomestorage);
              object = protochunk;
 diff --git a/src/main/java/net/minecraft/server/ChunkSection.java b/src/main/java/net/minecraft/server/ChunkSection.java
-index e056fbcb216977401fd2778fcd3ee7ed5f020214..eeb7eee925d31d1ed8e6bbd55888cb5ebe54afa2 100644
+index 4a5f39ed824b056b4bddb395f18b343df86d3931..887a726be7dc5d3ea1db557eaf45940a33273cef 100644
 --- a/src/main/java/net/minecraft/server/ChunkSection.java
 +++ b/src/main/java/net/minecraft/server/ChunkSection.java
 @@ -1,5 +1,6 @@
@@ -1084,12 +1084,12 @@ index e056fbcb216977401fd2778fcd3ee7ed5f020214..eeb7eee925d31d1ed8e6bbd55888cb5e
          return this.blockIds;
      }
  
--    public void writeChunkSection(PacketDataSerializer packetDataSerializer) { this.b(packetDataSerializer); } // Paper - OBFHELPER
+-    @com.destroystokyo.paper.util.annotation.ObfuscateHelper("writeChunkSection") // Paper - OBFHELPER
 -    public void b(PacketDataSerializer packetdataserializer) {
 +    // Paper start - Anti-Xray - Add chunk packet info
-+    @Deprecated public void writeChunkSection(PacketDataSerializer packetDataSerializer) { this.b(packetDataSerializer); } // OBFHELPER // Notice for updates: Please make sure this method isn't used anywhere
++    @com.destroystokyo.paper.util.annotation.ObfuscateHelper("writeChunkSection") // OBFHELPER
 +    @Deprecated public void b(PacketDataSerializer packetdataserializer) { this.writeChunkSection(packetdataserializer, null); } // Notice for updates: Please make sure this method isn't used anywhere
-+    public void writeChunkSection(PacketDataSerializer packetDataSerializer, ChunkPacketInfo<IBlockData> chunkPacketInfo) { this.b(packetDataSerializer, chunkPacketInfo); } // OBFHELPER
++    @com.destroystokyo.paper.util.annotation.ObfuscateHelper("writeChunkSection") // OBFHELPER
 +    public void b(PacketDataSerializer packetdataserializer, ChunkPacketInfo<IBlockData> chunkPacketInfo) {
 +        // Paper end
          packetdataserializer.writeShort(this.nonEmptyBlockCount);
@@ -1099,7 +1099,7 @@ index e056fbcb216977401fd2778fcd3ee7ed5f020214..eeb7eee925d31d1ed8e6bbd55888cb5e
  
      public int j() {
 diff --git a/src/main/java/net/minecraft/server/DataPaletteBlock.java b/src/main/java/net/minecraft/server/DataPaletteBlock.java
-index 2c1d1b1a5568ab104fb1a0f283f289680d59e81e..2c7872bd0516c820a42682b5281dbbaa1b467beb 100644
+index 1b5aa4104f669db47d44b07bf2c5c0779fb0a463..5799fc6291df90ffef50fcc1b91900df193a729f 100644
 --- a/src/main/java/net/minecraft/server/DataPaletteBlock.java
 +++ b/src/main/java/net/minecraft/server/DataPaletteBlock.java
 @@ -3,6 +3,7 @@ package net.minecraft.server;
@@ -1180,12 +1180,12 @@ index 2c1d1b1a5568ab104fb1a0f283f289680d59e81e..2c7872bd0516c820a42682b5281dbbaa
          return t0 == null ? this.g : t0;
      }
  
--    public void writeDataPaletteBlock(PacketDataSerializer packetDataSerializer) { this.b(packetDataSerializer); } // Paper - OBFHELPER
+-    @com.destroystokyo.paper.util.annotation.ObfuscateHelper("writeDataPaletteBlock") // Paper - OBFHELPER
 -    public void b(PacketDataSerializer packetdataserializer) {
 +    // Paper start - Anti-Xray - Add chunk packet info
-+    @Deprecated public void writeDataPaletteBlock(PacketDataSerializer packetDataSerializer) { this.b(packetDataSerializer); } // OBFHELPER // Notice for updates: Please make sure this method isn't used anywhere
++    @com.destroystokyo.paper.util.annotation.ObfuscateHelper("writeDataPaletteBlock") // OBFHELPER
 +    @Deprecated public void b(PacketDataSerializer packetdataserializer) { this.writeDataPaletteBlock(packetdataserializer, null, 0); } // Notice for updates: Please make sure this method isn't used anywhere
-+    public void writeDataPaletteBlock(PacketDataSerializer packetDataSerializer, ChunkPacketInfo<T> chunkPacketInfo, int chunkSectionIndex) { this.b(packetDataSerializer, chunkPacketInfo, chunkSectionIndex); } // OBFHELPER
++    @com.destroystokyo.paper.util.annotation.ObfuscateHelper("writeDataPaletteBlock") // OBFHELPER
 +    public void b(PacketDataSerializer packetdataserializer, ChunkPacketInfo<T> chunkPacketInfo, int chunkSectionIndex) {
 +        // Paper end
          this.a();
@@ -1220,7 +1220,7 @@ index 2c1d1b1a5568ab104fb1a0f283f289680d59e81e..2c7872bd0516c820a42682b5281dbbaa
  
          if (this.h == this.b) {
 diff --git a/src/main/java/net/minecraft/server/PacketPlayOutMapChunk.java b/src/main/java/net/minecraft/server/PacketPlayOutMapChunk.java
-index 23223f3f45210cf23f44f9012f292db80df781a0..9b608d73869bd2907f705562c8378bc2f205767b 100644
+index a91f070aaa7a27fb70631dc829d116bf4bbc40be..77f68932a17e5f6e12e20391144bd1b45e2cae97 100644
 --- a/src/main/java/net/minecraft/server/PacketPlayOutMapChunk.java
 +++ b/src/main/java/net/minecraft/server/PacketPlayOutMapChunk.java
 @@ -1,5 +1,6 @@
@@ -1291,12 +1291,12 @@ index 23223f3f45210cf23f44f9012f292db80df781a0..9b608d73869bd2907f705562c8378bc2
          return bytebuf;
      }
  
--    public int writeChunk(PacketDataSerializer packetDataSerializer, Chunk chunk, int chunkSectionSelector) { return this.a(packetDataSerializer, chunk, chunkSectionSelector); } // Paper - OBFHELPER
+-    @com.destroystokyo.paper.util.annotation.ObfuscateHelper("writeChunk") // Paper - OBFHELPER
 -    public int a(PacketDataSerializer packetdataserializer, Chunk chunk, int i) {
 +    // Paper start - Anti-Xray - Add chunk packet info
-+    @Deprecated public int writeChunk(PacketDataSerializer packetDataSerializer, Chunk chunk, int chunkSectionSelector) { return this.a(packetDataSerializer, chunk, chunkSectionSelector); } // OBFHELPER // Notice for updates: Please make sure this method isn't used anywhere
++    @com.destroystokyo.paper.util.annotation.ObfuscateHelper("writeChunk") // OBFHELPER
 +    @Deprecated public int a(PacketDataSerializer packetdataserializer, Chunk chunk, int i) { return this.writeChunk(packetdataserializer, chunk, i, null); } // Notice for updates: Please make sure this method isn't used anywhere
-+    public int writeChunk(PacketDataSerializer packetDataSerializer, Chunk chunk, int chunkSectionSelector, ChunkPacketInfo<IBlockData> chunkPacketInfo) { return this.a(packetDataSerializer, chunk, chunkSectionSelector, chunkPacketInfo); } // OBFHELPER
++    @com.destroystokyo.paper.util.annotation.ObfuscateHelper("writeChunk") // OBFHELPER
 +    public int a(PacketDataSerializer packetdataserializer, Chunk chunk, int i, ChunkPacketInfo<IBlockData> chunkPacketInfo) {
 +        // Paper end
          int j = 0;
